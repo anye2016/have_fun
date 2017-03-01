@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>matching game</title>
+
+<style type="text/css">
+body
+{
+	background:#CCC;
+}
+.tbody
+{
+	width:1600px;
+	height:960px;
+	margin-left:auto;
+	margin-right:auto;
+	background:#FFF;
+}
+h1
+{
+	padding-left:50px;
+	padding-top:40px;
+}
+p
+{
+	padding-left:50px;
+}
+#left
+{
+	width:799px;
+	float:left;
+	position:relative;
+	height:800px;
+}
+#right
+{
+	width:799px;
+	float:left;
+	border-left:2px;
+	border-left-style:dashed;
+	position:relative;
+	
+	height:800px;
+}
+.face
+{
+	width:50px;
+	height:50px;
+	background:url(face.gif);
+	background-size:50px 50px;
+	position:absolute;
+}
+</style>
+</head>
+<body>
+<script>
+var num = 5;
+var count = 0;
+function creatface(num,count)
+{
+	var i=num+count*3
+		destination1 = document.getElementById("left");
+		while(destination1.firstChild) //当elem下还存在子节点时 循环继续  
+   			 {  
+        destination1.removeChild(destination1.firstChild);  
+  		  }  
+		  destination2 = document.getElementById("right");
+		  while(destination2.firstChild) //当elem下还存在子节点时 循环继续  
+   			 {  
+        destination2.removeChild(destination2.firstChild);  
+  		  }  
+	for(var j=0;j<i;j++)
+	{
+		
+		var smile = document.createElement('div');
+		smile.addEventListener('click',mistake);
+		smile.style.top = Math.random()*700 + "px";
+		smile.style.left = Math.random()*700 + "px";
+		smile.className="face";
+		smile2=smile.cloneNode();
+		destination1.appendChild(smile);
+		destination2.appendChild(smile2);
+	}
+		var trueone = document.createElement('div');
+		trueone.addEventListener('click',rightone);
+		trueone.style.top = Math.random()*700 + "px";
+		trueone.style.left = Math.random()*700 + "px";
+		trueone.className="face";
+		destination1.appendChild(trueone);
+		
+}
+function mistake()
+{
+	alert("You have made a mistake.");
+	document.location.reload();
+}
+function rightone()
+{
+	count++;
+	creatface(num,count);
+}	
+</script>
+
+<div class="tbody">
+<h1>Matching Game</h1>
+<P>Please click the extra smiling face on the left,<b onClick="return creatface(5,0)">Click me</b> to begin</P>
+<div id="left">left</div>
+<div id="right">right</div>
+</div>
+</body>
+</html>
